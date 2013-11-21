@@ -1,7 +1,7 @@
 %Par1 parent 1
 %Par2 parent 2
 %numCross number of time to cross over.  if = -1, then randomly decide
-function [Pop] = CrossOver(Pop, A, B, numCross, Matcher, T)
+function [Pop] = CrossOver(Pop, A, B, numCross, Matcher, T, ProbTest )
 %     disp('CrossOver')        
     %initialize Crossover children
     X = Pop(A,:);
@@ -50,8 +50,8 @@ function [Pop] = CrossOver(Pop, A, B, numCross, Matcher, T)
     % Not the best way of doing this. Compare should really return the best of two.
     parentScore = max( A(1,1), B(1,1) );
 
-    X = Compare( X, parentScore, Matcher, T );
-    Y = Compare( Y, parentScore, Matcher, T );
+    X = Compare( X, parentScore, Matcher, T, ProbTest );
+    Y = Compare( Y, parentScore, Matcher, T, ProbTest );
 
     if X(1,1)<Pop(A,1)
         Pop(A,1)=X(1,1);

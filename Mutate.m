@@ -1,5 +1,5 @@
 % Randomly picks A or B, mutates it in a batch according to varM
-function [ Pop ] = Mutate( Pop, A, B, varM, Matcher, T )
+function [ Pop ] = Mutate( Pop, A, B, varM, Matcher, T , ProbTest )
 %     disp('Mutate')    
     i = randi( size(Pop,2) -1 ) + 1 ;% Pick a random bit in the vector
     if rand(1) < 0.5
@@ -22,7 +22,7 @@ function [ Pop ] = Mutate( Pop, A, B, varM, Matcher, T )
     end % End-of-For-Loop
 
     %score the child
-    Child = Compare( Child, parentScore, Matcher, T);
+    Child = Compare( Child, parentScore, Matcher, T, ProbTest );
 
     %replace child
     if pick==1

@@ -11,7 +11,7 @@
 % Output x2
 
 
-function [ item ] = Compare( item, parentScore, Matcher, T )
+function [ item ] = Compare( item, parentScore, Matcher, T, ProbTest )
     % For each row of the truth table find the score for that 
 	% item weight system
     
@@ -23,13 +23,13 @@ function [ item ] = Compare( item, parentScore, Matcher, T )
         %x2=0, bias = 1
         data = [ Matcher(row,1); 0; 1; 0; 0 ];
         %plug into activation sigmoid function and place in separate cells
-        cell_response = num2cell( Sigmoid( weight*data, parentScore, T ) );      %% REPLACE WHEN WE WANT TO TEST SIM_ANNEAL
+        cell_response = num2cell( ProbTest( weight*data, parentScore, T ) );      %% REPLACE WHEN WE WANT TO TEST SIM_ANNEAL
         [X1(row), X2(row)] = cell_response{:};
 
         %x2=input2, bias = 1
         data = [ Matcher(row,1); Matcher(row,2); 1; X1(row); X2(row) ] ;
         %plug into activation sigmoid function and place in separate cells
-        cell_response = num2cell( Sigmoid( weight*data, parentScore, T ) );      %% REPLACE WHEN WE WANT TO TEST SIM_ANNEAL
+        cell_response = num2cell( ProbTest( weight*data, parentScore, T ) );      %% REPLACE WHEN WE WANT TO TEST SIM_ANNEAL
         [X1(row), X2(row)] = cell_response{:};    
 
         %calculate error
