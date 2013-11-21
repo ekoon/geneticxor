@@ -1,6 +1,6 @@
 %% General Genetic Algorithm. 
 function [X, Generations, Best, BestScore] = ...
-    GA2( input, sigma, varM, numCross, chanceCross, chanceMutate, desired, Matcher ) 
+    GA2( ProbTest, input, sigma, varM, numCross, chanceCross, chanceMutate, desired, Matcher ) 
     
     % Initialize
     BestScore=0; Best = 0;
@@ -11,7 +11,7 @@ function [X, Generations, Best, BestScore] = ...
     T = 1000;
    
     % Initialize Score and Sort Population
-    [ Pop ] = ScoreSystem( Pop , Matcher, T );
+    [ Pop ] = ScoreSystem( Pop , Matcher, T, ProbTest );
     BestScore = Pop(1,1);
     X(Generations)=BestScore;
     Best = Pop(1,2:vecLength+1);
@@ -26,11 +26,11 @@ function [X, Generations, Best, BestScore] = ...
             [A, B, MatingPool] = take2random( MatingPool );
 
             if rand(1) < chanceCross 
-                Pop = CrossOver(Pop, A, B, numCross, Matcher, T );
+                Pop = CrossOver(Pop, A, B, numCross, Matcher, T, ProbTest );
             end % end cross over
 
             if rand(1) < chanceMutate
-                Pop = Mutate( Pop, A, B, varM, Matcher, T );
+                Pop = Mutate( Pop, A, B, varM, Matcher, T, ProbTest );
             end % end mutation           
         end % Finished running through MatingPool
 

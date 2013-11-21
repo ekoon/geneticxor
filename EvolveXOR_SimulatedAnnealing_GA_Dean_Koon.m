@@ -17,9 +17,10 @@ function[ Pop, Generations, Score] = EvolveXOR_SimulatedAnnealing_GA_Dean_Koon( 
     %assume
     sigma=3; varM=1; numCross=-1; chanceCross=.8; chanceMutate=.8; threshold=.01;
     Matcher = [ 1 1 0; 1 0 1; 0 1 1; 0 0 0]; 
+    ProbTest = @SimAnnealing,
         
     [ X, Generations, Best, Score ] = ...
-        GA( Pop, sigma, varM, numCross, chanceCross, chanceMutate, threshold, Matcher )
+        GA( ProbTest, Pop, sigma, varM, numCross, chanceCross, chanceMutate, threshold, Matcher );
     
     %Display Best weight
     disp('weight')
